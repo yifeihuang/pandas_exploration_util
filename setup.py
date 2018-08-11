@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="example_pkg",
+    name="Pandas Data Exploration Utility Package",
     version="0.0.1",
-    author="Example Author",
-    author_email="author@example.com",
-    description="A small example package",
+    author="Yifei Huang",
+    author_email="yifei.huang@gmail.com",
+    description="Utility functions to help with exploratory data analysis on top the Pandas APIs",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pypa/sampleproject",
