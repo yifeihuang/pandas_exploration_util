@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pandas as pd
 
 import plotly.offline as py
@@ -5,7 +6,6 @@ py.init_notebook_mode(connected=True)
 import plotly.graph_objs as go
 import plotly.tools as tls
 
-from __future__ import print_function
 from ipywidgets import interact, interactive, fixed
 import ipywidgets as widgets
 from IPython.display import display

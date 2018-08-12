@@ -11,7 +11,7 @@ setuptools.setup(
     description="Utility functions to help with exploratory data analysis on top the Pandas APIs",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/yifeihuang/pandas_exploration_util",
     packages=setuptools.find_packages(),
     classifiers=(
         "Programming Language :: Python :: 3",
