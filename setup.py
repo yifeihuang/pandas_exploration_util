@@ -18,7 +18,7 @@ setuptools.setup(
           'plotly',
           'ipywidgets',
           'IPython'
-      ]
+      ],
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
