@@ -1,0 +1,9 @@
+*.egg-info
+*.pyc
+*.gz
+.ipynb_checkpoints
+
+# dist files
+build
+dist
+Pandas_Data_Exploration_Utility_Package.egg-info
