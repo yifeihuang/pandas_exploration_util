@@ -144,7 +144,10 @@ def generate_widget(df):
             asc_desc.disable = True
     
     def update_col3(change):
-        col3.options = [c for c in cols if c != col1.value]
+        if viz.value == 'pareto':
+            col3.options = [c for c in cols if c != col1.value]
+        else:
+            pass
     
     viz.observe(update_cols, 'value')
     col1.observe(update_col3, 'value')
