@@ -150,8 +150,14 @@ def generate_widget(df):
     col1.observe(update_col3, 'value')
     
     ui = widgets.VBox(
-        [widgets.HBox([viz, null_inclusion, widgets.Label('(Pandas ignores NA/Null by default)')])
-         , widgets.HBox([col1, col2, col3, col4, asc_desc])]
+        [
+            widgets.HBox([
+                widgets.Label('Choose Viz Type')
+                , viz
+                , null_inclusion
+                , widgets.Label('(Pandas ignores NA/Null by default)')
+            ])
+            , widgets.HBox([col1, col2, col3, col4, asc_desc])]
     )
     out = widgets.interactive_output(f
                                      , {'viz': viz
