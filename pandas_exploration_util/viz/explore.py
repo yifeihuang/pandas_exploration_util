@@ -152,13 +152,15 @@ def generate_widget(df):
     viz.observe(update_cols, 'value')
     col1.observe(update_col3, 'value')
     
+    desc_style = {'description_width': 'initial'}
+
     ui = widgets.VBox(
         [
             widgets.HBox([
-                widgets.Label('Choose Visualization Type ')
+                widgets.Label('Choose Visualization Type ', style = desc_style)
                 , viz
-                , widgets.Label('Fill NA with -1000 (Pandas ignores NA/Null by default)')
                 , null_inclusion
+                , widgets.Label('Fill NA with -1000 (Pandas ignores NA/Null by default)', style = desc_style)
             ])
             , widgets.HBox([col1, col2, col3, col4, asc_desc])]
     )
