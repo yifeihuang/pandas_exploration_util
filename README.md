@@ -9,7 +9,7 @@
     + [X-Y plot](#x-y-plot)
 
 ## Overview
-Pandas Data Exploration utility is an interactive, notebook based library for quickly profiling and exploring the shape of data and the relationships between data.
+Pandas Data Exploration utility is an interactive, notebook based library for quickly profiling and exploring the shape of data and the relationships between data. Using existing APIs from IpyWidget, Plot.ly, and Pandas, it creates a flexible point and click widget that allows the user to easily explore and visualize the dataset.
 
 ## Installation
 ```
