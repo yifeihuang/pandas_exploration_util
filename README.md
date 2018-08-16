@@ -25,6 +25,9 @@ global_temp = pd.read_csv("./data/GlobalTemperatures.csv", parse_dates = [0], in
 
 pe.generate_widget(global_temp)
 ```
+see `/test` for sample data and test jupyter notebook
+https://github.com/yifeihuang/pandas_exploration_util/tree/master/test
+
 ***
 ### Pareto plot
 Visualize the top values of any column as ranked by aggregation of any other column. Support aggregation functions include `'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'`
