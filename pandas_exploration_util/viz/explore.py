@@ -20,8 +20,8 @@ def generate_widget(df):
                 '{s}: {2:%} null ({0:d} out of {0:d})'\
                     .format(
                         colx
-                        , source[colx].isnull().sum / source.shape[0]
-                        , source[colx].isnull().sum
+                        , source[colx].isnull().sum() / source.shape[0]
+                        , source[colx].isnull().sum()
                         , source.shape[0]
                     )
                 )
