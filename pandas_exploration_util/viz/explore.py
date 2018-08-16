@@ -109,14 +109,18 @@ def generate_widget(df):
         plot_url = py.iplot(fig)
     
     cols = df.columns
-    viz = widgets.Dropdown(options = ['pareto', 'distribution', 'X-Y'])
+
+    desc_style = {'description_width': 'initial'}
+
+    viz = widgets.Dropdown(options = ['pareto', 'distribution', 'X-Y'], description = "Choose Visualization", style = desc_style)
     col1 = widgets.Dropdown(options = cols)
     col2 = widgets.Dropdown(options = ['count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'])
     col3 = widgets.Dropdown(options = [c for c in cols if c != col1.value], disabled = False)
     col4 = widgets.Dropdown(options = [10,20,50,100], disabled = False)
     null_inclusion = widgets.Checkbox(
                         value=False,
-                        # description='Fill NA with -1000',
+                        description = "Fill NA with -1000 (Pandas ignores NA/Null by default)", 
+                        style = desc_style
                     )
     asc_desc = widgets.Dropdown(options = ['Descending', 'Ascending'], disabled = False)
     
@@ -151,16 +155,14 @@ def generate_widget(df):
     
     viz.observe(update_cols, 'value')
     col1.observe(update_col3, 'value')
-    
-    desc_style = {'description_width': 'initial'}
 
     ui = widgets.VBox(
         [
             widgets.HBox([
-                widgets.Label('Choose Visualization Type ', style = desc_style)
-                , viz
+                # widgets.Label('Choose Visualization Type ', style = desc_style)
+                viz
                 , null_inclusion
-                , widgets.Label('Fill NA with -1000 (Pandas ignores NA/Null by default)', style = desc_style)
+                # , widgets.Label('Fill NA with -1000 (Pandas ignores NA/Null by default)', style = desc_style)
             ])
             , widgets.HBox([col1, col2, col3, col4, asc_desc])]
     )
