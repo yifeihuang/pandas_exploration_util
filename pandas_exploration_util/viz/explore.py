@@ -113,10 +113,13 @@ def generate_widget(df):
     desc_style = {'description_width': 'initial'}
 
     viz = widgets.Dropdown(options = ['pareto', 'distribution', 'X-Y'], description = "Choose Visualization", style = desc_style)
-    col1 = widgets.Dropdown(options = cols)
-    col2 = widgets.Dropdown(options = ['count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'])
-    col3 = widgets.Dropdown(options = [c for c in cols if c != col1.value], disabled = False)
-    col4 = widgets.Dropdown(options = [10,20,50,100], disabled = False)
+    col1 = widgets.Dropdown(options = cols, description = "Group By", style = desc_style)
+    col2 = widgets.Dropdown(options = ['count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
+                            , description = "Calculate", style = desc_style)
+    col3 = widgets.Dropdown(options = [c for c in cols if c != col1.value], disabled = False
+                            , description = " of ", style = desc_style)
+    col4 = widgets.Dropdown(options = [10,20,50,100], disabled = False
+                            , description = "Show Top ", style = desc_style)
     null_inclusion = widgets.Checkbox(
                         value=False,
                         description = "Fill NA with -1000 (Pandas ignores NA/Null by default)", 
@@ -126,6 +129,10 @@ def generate_widget(df):
     
     def update_cols(change):
         if(change['new'] == 'pareto'):
+            col1.description = 'Group By'
+            col2.description = 'Calculate'
+            col3.description = ' of '
+            col4.description = 'Show Top '
             col2.options = ['count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
             col2.disabled = False
             col3.options = [c for c in cols if c != col1.value]
@@ -133,6 +140,10 @@ def generate_widget(df):
             col4.disabled = False
             asc_desc.disabled = False
         elif(change['new'] == 'distribution'):
+            col1.description = 'Plot Distribution of '
+            col2.description = ''
+            col3.description = ''
+            col4.description = ''
             col2.options = ['']
             col2.disabled = True
             col3.options = ['']
@@ -140,6 +151,10 @@ def generate_widget(df):
             col4.disabled = True
             asc_desc.disabled = True
         elif(change['new'] == 'X-Y'):
+            col1.description = 'Plot '
+            col2.description = 'Vs '
+            col3.description = 'Using '
+            col4.description = ''
             col2.options = cols
             col2.disabled = False
             col3.options = ['lines', 'markers', 'lines+markers']
@@ -159,12 +174,12 @@ def generate_widget(df):
     ui = widgets.VBox(
         [
             widgets.HBox([
-                # widgets.Label('Choose Visualization Type ', style = desc_style)
                 viz
                 , null_inclusion
-                # , widgets.Label('Fill NA with -1000 (Pandas ignores NA/Null by default)', style = desc_style)
             ])
-            , widgets.HBox([col1, col2, col3, col4, asc_desc])]
+            , widgets.HBox([col1])
+            , widgets.HBox([col2, col3])
+            , widgets.HBox([col4, asc_desc])]
     )
     out = widgets.interactive_output(f
                                      , {'viz': viz
