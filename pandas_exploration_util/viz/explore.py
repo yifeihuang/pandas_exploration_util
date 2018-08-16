@@ -22,7 +22,8 @@ def generate_widget(df):
             
             
             if(coly == 'unaggregrated'):
-                grouped = temp
+                grouped = temp.loc[:, [colx, colz]].set_index(colx)
+                grouped.columns = pd.MultiIndex.from_product([[colz],[coly]])
             if(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
                 grouped = temp.groupby(colx).agg(
                     {
@@ -35,12 +36,11 @@ def generate_widget(df):
                 )
 
 
-            print(grouped)
-            print(grouped.unstack())
+            print(grouped.head())
 
             trace = go.Scattergl(
-                x = grouped[colx],
-                y = grouped[colz],
+                x = grouped.index,
+                y = grouped[colz][coly],
                 name = coly + ' of ' + colz + ' vs ' + colx,
                 mode = colw
             )
