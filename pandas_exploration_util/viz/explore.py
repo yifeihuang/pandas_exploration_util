@@ -19,6 +19,25 @@ def generate_widget(df):
             temp = source
             if na:
                 temp = temp.fillna(-1000)
+            
+            grouped = temp.groupby(colx)
+            
+            if(coly == 'unaggregrated'):
+                pass
+            elif(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
+                grouped = grouped.agg(
+                    {
+                        colz : [coly]
+                    }
+                )
+            elif(coly == 'uniques'):
+                grouped = grouped.apply(
+                    lambda g: pd.Series(g[colz].unique().size, index = pd.MultiIndex.from_product([[colz],[coly]]))
+                )
+
+
+            print(grouped)
+
             trace = go.Scattergl(
                 x = temp[colx],
                 y = temp[coly],
@@ -153,13 +172,14 @@ def generate_widget(df):
         elif(change['new'] == 'X-Y'):
             col1.description = 'Plot '
             col2.description = 'Vs '
-            col3.description = 'Using '
-            col4.description = ''
+            col3.description = 'Of '
+            col4.description = 'Using '
             col2.options = cols
             col2.disabled = False
-            col3.options = ['lines', 'markers', 'lines+markers']
+            col3.options = ['unaggregrated', 'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
+            col4.options = ['lines', 'markers', 'lines+markers']
             col3.disabled = False
-            col4.disabled = True
+            col4.disabled = False
             asc_desc.disabled = True
     
     def update_col3(change):
