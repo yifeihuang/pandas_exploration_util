@@ -23,7 +23,7 @@ def generate_widget(df):
             grouped = temp.groupby(colx)
             
             if(coly == 'unaggregrated'):
-                pass
+                grouped = grouped.reset_index()
             elif(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
                 grouped = grouped.agg(
                     {
@@ -39,10 +39,10 @@ def generate_widget(df):
             print(grouped)
 
             trace = go.Scattergl(
-                x = temp[colx],
-                y = temp[coly],
-                name = coly + ' vs ' + colx,
-                mode = colz
+                x = grouped[colx],
+                y = grouped[colz],
+                name = coly + ' of ' + colz + ' vs ' + colx,
+                mode = colw
             )
             layout = go.Layout(
                 title=coly + ' vs ' + colx,
