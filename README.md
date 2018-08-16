@@ -20,17 +20,17 @@ pe.generate_widget(global_temp)
 ### Pareto plot
 Visualize the top values of any column as ranked by aggregation of any other column. Support aggregation functions include `'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'`
 <p align="center">
-    <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
+    <img src="https://raw.githubusercontent.com/yifeihuang/pandas_exploration_util/master/img/pareto.png">
 </a></p>
 
 ### Distribution plot
 Visualize distribution of any numerical value. Binning is automatically determined by the plot.ly histogram method.
 <p align="center">
-    <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
+    <img src="https://raw.githubusercontent.com/yifeihuang/pandas_exploration_util/master/img/distribution.png">
 </a></p>
 
 ### X-Y plot
 Visualize the X-Y scatter of any column vs aggregation of any other column. Support aggregation functions include `'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'`
 <p align="center">
-    <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
+    <img src="https://raw.githubusercontent.com/yifeihuang/pandas_exploration_util/master/img/x-y.png">
 </a></p>
