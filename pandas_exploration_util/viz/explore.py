@@ -17,11 +17,20 @@ def generate_widget(df):
     def f(viz = 'X-Y', colx = '', coly = '', colz = '', colw = 10, na = False, asc = '', source = df):
         if(viz == 'X-Y'):
             print(
-                '{:s}: {2:%} null ({0:d} out of {0:d})'\
+                '{:s}: {:0.1%} null ({:d} out of {:d})'\
                     .format(
                         colx
                         , source[colx].isnull().sum() / source.shape[0]
                         , source[colx].isnull().sum()
+                        , source.shape[0]
+                    )
+                )
+            print(
+                '{:s}: {:0.1%} null ({:d} out of {:d})'\
+                    .format(
+                        colz
+                        , source[colz].isnull().sum() / source.shape[0]
+                        , source[colz].isnull().sum()
                         , source.shape[0]
                     )
                 )
@@ -63,6 +72,24 @@ def generate_widget(df):
             )
             
         elif(viz == 'pareto'):
+            print(
+                '{:s}: {:0.1%} null ({:d} out of {:d})'\
+                    .format(
+                        colx
+                        , source[colx].isnull().sum() / source.shape[0]
+                        , source[colx].isnull().sum()
+                        , source.shape[0]
+                    )
+                )
+            print(
+                '{:s}: {:0.1%} null ({:d} out of {:d})'\
+                    .format(
+                        colz
+                        , source[colz].isnull().sum() / source.shape[0]
+                        , source[colz].isnull().sum()
+                        , source.shape[0]
+                    )
+                )
             sort_order = (asc == 'Ascending')
             temp = source
             if na:
@@ -113,6 +140,15 @@ def generate_widget(df):
             )
 
         else:
+            print(
+                '{:s}: {:0.1%} null ({:d} out of {:d})'\
+                    .format(
+                        colx
+                        , source[colx].isnull().sum() / source.shape[0]
+                        , source[colx].isnull().sum()
+                        , source.shape[0]
+                    )
+                )
             temp = source
             if na:
                 temp = temp.fillna(-1000)
