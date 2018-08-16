@@ -174,9 +174,9 @@ def generate_widget(df):
             col2.description = 'Vs '
             col3.description = 'Of '
             col4.description = 'Using '
-            col2.options = cols
+            col2.options = ['unaggregrated', 'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
             col2.disabled = False
-            col3.options = ['unaggregrated', 'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
+            col3.options = cols
             col4.options = ['lines', 'markers', 'lines+markers']
             col3.disabled = False
             col4.disabled = False
