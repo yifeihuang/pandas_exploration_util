@@ -1,5 +1,36 @@
-# Initial Version
+# Pandas Data Exploration Utility Package
+***
+## Overview
+Pandas Data Exploration utility is an interactive, notebook based library for quickly profiling and exploring the shape of data and the relationships between data.
+***
+## Installation
+```
+pip install Pandas-Data-Exploration-Utility-Package
+```
+***
+## Usage
+```
+import pandas as pd
+import pandas_exploration_util.viz.explore as pe
 
-This is a simple example package. You can use
-[Github-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+global_temp = pd.read_csv("./data/GlobalTemperatures.csv", parse_dates = [0], infer_datetime_format=True)
+
+pe.generate_widget(global_temp)
+```
+### Pareto plot
+Visualize the top values of any column as ranked by aggregation of any other column. Support aggregation functions include `'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'`
+<p align="center">
+    <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
+</a></p>
+
+### Distribution plot
+Visualize distribution of any numerical value. Binning is automatically determined by the plot.ly histogram method.
+<p align="center">
+    <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
+</a></p>
+
+### X-Y plot
+Visualize the X-Y scatter of any column vs aggregation of any other column. Support aggregation functions include `'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques'`
+<p align="center">
+    <img src="https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/plotly_2017.png">
+</a></p>
