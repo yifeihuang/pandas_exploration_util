@@ -20,13 +20,11 @@ def generate_widget(df):
             if na:
                 temp = temp.fillna(-1000)
             
-            grouped = temp.groupby(colx)
+            grouped = temp
             
-            if(coly == 'unaggregrated'):
-                grouped = grouped.apply(
-                    lambda g: pd.Series(g[colz], index = pd.MultiIndex.from_product([[colz],[coly]]))
-                )
-            elif(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
+            # if(coly == 'unaggregrated'):
+            #     pass
+            if(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
                 grouped = grouped.agg(
                     {
                         colz : [coly]
@@ -39,6 +37,7 @@ def generate_widget(df):
 
 
             print(grouped)
+            print(grouped.unstack())
 
             trace = go.Scattergl(
                 x = grouped[colx],
