@@ -23,7 +23,9 @@ def generate_widget(df):
             grouped = temp.groupby(colx)
             
             if(coly == 'unaggregrated'):
-                grouped = grouped.reset_index()
+                grouped = grouped.apply(
+                    lambda g: pd.Series(g[colz], index = pd.MultiIndex.from_product([[colz],[coly]]))
+                )
             elif(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
                 grouped = grouped.agg(
                     {
