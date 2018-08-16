@@ -16,6 +16,16 @@ def generate_widget(df):
 
     def f(viz = 'X-Y', colx = '', coly = '', colz = '', colw = 10, na = False, asc = '', source = df):
         if(viz == 'X-Y'):
+            print(
+                '{s}: {2:%} null ({0:d} out of {0:d})'\
+                    .format(
+                        colx
+                        , source[colx].isnull().sum / source.shape[0]
+                        , source[colx].isnull().sum
+                        , source.shape[0]
+                    )
+                )
+
             temp = source
             if na:
                 temp = temp.fillna(-1000)
@@ -34,9 +44,7 @@ def generate_widget(df):
                 grouped = temp.groupby(colx).apply(
                     lambda g: pd.Series(g[colz].unique().size, index = pd.MultiIndex.from_product([[colz],[coly]]))
                 )
-
-
-            print(grouped.head())
+            # print(grouped.head())
 
             trace = go.Scattergl(
                 x = grouped.index,
@@ -45,9 +53,9 @@ def generate_widget(df):
                 mode = colw
             )
             layout = go.Layout(
-                title=coly + ' vs ' + colx,
+                title=coly + ' of ' + colz + ' vs ' + colx,
                 yaxis=dict(
-                    title=coly
+                    title=coly + ' of ' + colz
                 ),
                 xaxis=dict(
                     title=colx
@@ -156,6 +164,7 @@ def generate_widget(df):
             col2.disabled = False
             col3.options = [c for c in cols if c != col1.value]
             col3.disabled = False
+            col4.options = [10,20,50,100]
             col4.disabled = False
             asc_desc.disabled = False
         elif(change['new'] == 'distribution'):
