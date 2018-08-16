@@ -116,7 +116,7 @@ def generate_widget(df):
     col4 = widgets.Dropdown(options = [10,20,50,100], disabled = False)
     null_inclusion = widgets.Checkbox(
                         value=False,
-                        description='Fill NA with -1000',
+                        # description='Fill NA with -1000',
                     )
     asc_desc = widgets.Dropdown(options = ['Descending', 'Ascending'], disabled = False)
     
@@ -127,21 +127,21 @@ def generate_widget(df):
             col3.options = [c for c in cols if c != col1.value]
             col3.disabled = False
             col4.disabled = False
-            asc_desc.disable = False
+            asc_desc.disabled = False
         elif(change['new'] == 'distribution'):
             col2.options = ['']
             col2.disabled = True
             col3.options = ['']
             col3.disabled = True
             col4.disabled = True
-            asc_desc.disable = True
+            asc_desc.disabled = True
         elif(change['new'] == 'X-Y'):
             col2.options = cols
             col2.disabled = False
             col3.options = ['lines', 'markers', 'lines+markers']
             col3.disabled = False
             col4.disabled = True
-            asc_desc.disable = True
+            asc_desc.disabled = True
     
     def update_col3(change):
         if viz.value == 'pareto':
@@ -155,10 +155,10 @@ def generate_widget(df):
     ui = widgets.VBox(
         [
             widgets.HBox([
-                widgets.Label('Choose Viz Type')
+                widgets.Label('Choose Visualization Type ')
                 , viz
+                , widgets.Label('Fill NA with -1000 (Pandas ignores NA/Null by default)')
                 , null_inclusion
-                , widgets.Label('(Pandas ignores NA/Null by default)')
             ])
             , widgets.HBox([col1, col2, col3, col4, asc_desc])]
     )
