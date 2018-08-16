@@ -20,18 +20,17 @@ def generate_widget(df):
             if na:
                 temp = temp.fillna(-1000)
             
-            grouped = temp
             
-            # if(coly == 'unaggregrated'):
-            #     pass
+            if(coly == 'unaggregrated'):
+                grouped = temp
             if(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
-                grouped = grouped.agg(
+                grouped = temp.groupby(colx).agg(
                     {
                         colz : [coly]
                     }
                 )
             elif(coly == 'uniques'):
-                grouped = grouped.apply(
+                grouped = temp.groupby(colx).apply(
                     lambda g: pd.Series(g[colz].unique().size, index = pd.MultiIndex.from_product([[colz],[coly]]))
                 )
 
