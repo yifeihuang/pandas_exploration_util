@@ -17,7 +17,7 @@ def generate_widget(df):
     def f(viz = 'X-Y', colx = '', coly = '', colz = '', colw = 10, na = False, asc = '', source = df):
         if(viz == 'X-Y'):
             print(
-                '{s}: {2:%} null ({0:d} out of {0:d})'\
+                '{:s}: {2:%} null ({0:d} out of {0:d})'\
                     .format(
                         colx
                         , source[colx].isnull().sum() / source.shape[0]
