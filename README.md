@@ -66,4 +66,4 @@ Visualize the X-Y scatter of any column vs aggregation of any other column. Supp
 https://packaging.python.org/tutorials/packaging-projects/
 Assuming all relevant tools are installed and the relevant project files are properly defined
 1. build the distribution using `python3 setup.py sdist bdist_wheel`
-2. upload the distribution using `twine upload dist/*`
+2. upload the distribution using `twine upload dist/*{version}*`
