@@ -7,6 +7,7 @@
     + [Pareto plot](#pareto-plot)
     + [Distribution plot](#distribution-plot)
     + [X-Y plot](#x-y-plot)
+  * [Recommended development setup](#Recommended-development-setup)
 
 ## Overview
 Pandas Data Exploration utility is an interactive, notebook based library for quickly profiling and exploring the shape of data and the relationships between data. Using existing APIs from IpyWidget, Plot.ly, and Pandas, it creates a flexible point and click widget that allows the user to easily explore and visualize the dataset.
@@ -25,7 +26,7 @@ global_temp = pd.read_csv("./data/GlobalTemperatures.csv", parse_dates = [0], in
 
 pe.generate_widget(global_temp)
 ```
-see `/test` for sample data and test jupyter notebook
+see `/test` for sample data and test jupyter notebook  
 https://github.com/yifeihuang/pandas_exploration_util/tree/master/test
 
 ***
@@ -63,7 +64,7 @@ Visualize the X-Y scatter of any column vs aggregation of any other column. Supp
 10. Deactive the environment using `deactivate`
 
 ### Building and distributing
-https://packaging.python.org/tutorials/packaging-projects/
+https://packaging.python.org/tutorials/packaging-projects/  
 Assuming all relevant tools are installed and the relevant project files are properly defined
 1. build the distribution using `python3 setup.py sdist bdist_wheel`
 2. upload the distribution using `twine upload dist/*{version}*`
