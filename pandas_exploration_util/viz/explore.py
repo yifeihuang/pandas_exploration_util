@@ -139,7 +139,7 @@ def generate_widget(df):
                 )
             )
 
-        else:
+        elif(viz == 'distribution'):
             print(
                 '{}: {:0.1%} null ({:d} out of {:d})'\
                     .format(
@@ -198,7 +198,9 @@ def generate_widget(df):
             col4.description = 'Show Top '
             col2.options = ['count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
             col2.disabled = False
+            old_val = col3.value
             col3.options = [c for c in cols if c != col1.value]
+            col3.value = old_val
             col3.disabled = False
             col4.options = [10,20,50,100]
             col4.disabled = False
@@ -221,7 +223,9 @@ def generate_widget(df):
             col4.description = 'Using '
             col2.options = ['unaggregrated', 'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
             col2.disabled = False
+            old_val = col3.value
             col3.options = [c for c in cols if c != col1.value]
+            col3.value = old_val
             col4.options = ['markers', 'lines', 'lines+markers']
             col3.disabled = False
             col4.disabled = False
@@ -229,7 +233,9 @@ def generate_widget(df):
     
     def update_col3(change):
         if viz.value in ['pareto', 'X-Y']:
+            old_val = col3.value
             col3.options = [c for c in cols if c != col1.value]
+            col3.value = old_val
         else:
             pass
     
