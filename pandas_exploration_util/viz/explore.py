@@ -232,7 +232,7 @@ def generate_widget(df):
             asc_desc.disabled = True
     
     def update_col3(change):
-        if viz.value in ['pareto', 'X-Y']:
+        if (viz.value in ['pareto', 'X-Y']) and col1.value == col3.value:
             old_val = col3.value
             col3.options = [c for c in cols if c != col1.value]
             col3.value = old_val
