@@ -40,7 +40,7 @@ def generate_widget(df):
                 temp = temp.fillna(-1000)
             
             
-            if(coly == 'unaggregrated'):
+            if(coly == 'unaggregated'):
                 grouped = temp.loc[:, [colx, colz]].set_index(colx)
                 grouped.columns = pd.MultiIndex.from_product([[colz],[coly]])
             if(coly in ['count', 'sum', 'mean', 'std', 'max', 'min']):
@@ -152,20 +152,38 @@ def generate_widget(df):
             temp = source
             if na:
                 temp = temp.fillna(-1000)
-            trace = go.Histogram(x=temp[colx],
-                            name=colx,
-                            marker=dict(
-                                color='rgb(49,130,189)')
-                        )
-            layout = go.Layout(
-                title='distribution',
-                yaxis=dict(
-                    title='count'
-                ),
-                xaxis=dict(
-                    title=colx
+            
+            if coly == 'Absolute Unit':
+                trace = go.Histogram(x=temp[colx],
+                                name=colx,
+                                marker=dict(
+                                    color='rgb(49,130,189)')
+                            )
+                layout = go.Layout(
+                    title='distribution',
+                    yaxis=dict(
+                        title='count'
+                    ),
+                    xaxis=dict(
+                        title=colx
+                    )
                 )
-            )
+            else:
+                trace = go.Histogram(x=temp[colx],
+                                name=colx,
+                                histnorm='percent',
+                                marker=dict(
+                                    color='rgb(49,130,189)')
+                            )
+                layout = go.Layout(
+                    title='distribution',
+                    yaxis=dict(
+                        title='Percent (%)'
+                    ),
+                    xaxis=dict(
+                        title=colx
+                    )
+                )
             
         data = [trace]
         fig = go.Figure(data=data, layout=layout)
@@ -207,10 +225,10 @@ def generate_widget(df):
             asc_desc.disabled = False
         elif(change['new'] == 'distribution'):
             col1.description = 'Plot Distribution of '
-            col2.description = ''
+            col2.description = 'In '
             col3.description = ''
             col4.description = ''
-            col2.options = ['']
+            col2.options = ['Absolute Unit', 'Percent']
             col2.disabled = True
             col3.options = ['']
             col3.disabled = True
@@ -221,7 +239,7 @@ def generate_widget(df):
             col2.description = 'Vs '
             col3.description = 'Of '
             col4.description = 'Using '
-            col2.options = ['unaggregrated', 'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
+            col2.options = ['unaggregated', 'count', 'sum', 'mean', 'std', 'max', 'min', 'uniques']
             col2.disabled = False
             old_val = col3.value
             col3.options = [c for c in cols if c != col1.value]
@@ -233,9 +251,7 @@ def generate_widget(df):
     
     def update_col3(change):
         if (viz.value in ['pareto', 'X-Y']) and col1.value == col3.value:
-            old_val = col3.value
             col3.options = [c for c in cols if c != col1.value]
-            col3.value = old_val
         else:
             pass
     
