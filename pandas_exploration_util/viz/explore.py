@@ -12,6 +12,132 @@ from IPython.display import display
 
 # data exploration widgets
 
+def xy(colx, agg, colz, hover_display, source, mode = 'markers'):
+    # colx : x axis, str
+    # colz : y axis, str
+    # coly : aggregation function to apply to colz, str {'unaggregated' 'count', 'sum', 'mean', 'std', 'max', 'min'}
+    # hover_display: column to display for hover, only for unaggregated, str
+    # source: dataframe
+    # for a point and click version of this check out: https://github.com/yifeihuang/pandas_exploration_util
+    print(
+        '{}: {:0.1%} null ({:d} out of {:d})'\
+            .format(
+                colx
+                , source[colx].isnull().sum() / source.shape[0]
+                , source[colx].isnull().sum()
+                , source.shape[0]
+            )
+        )
+    print(
+        '{}: {:0.1%} null ({:d} out of {:d})'\
+            .format(
+                colz
+                , source[colz].isnull().sum() / source.shape[0]
+                , source[colz].isnull().sum()
+                , source.shape[0]
+            )
+        )
+    
+    data = []
+    for i in range(len(agg)):
+        temp = source
+        if(agg[i] == 'unaggregated'):
+            grouped = temp.loc[:, [colx, colz]].set_index(colx)
+            grouped.columns = pd.MultiIndex.from_product([[colz],[agg[i]]])
+        if(agg[i] in ['count', 'sum', 'mean', 'std', 'max', 'min', 'median']):
+            grouped = temp.groupby(colx).agg(
+                {
+                    colz : [agg[i]]
+                }
+            )
+        elif(agg[i] == 'uniques'):
+            grouped = temp.groupby(colx).apply(
+                lambda g: pd.Series(g[colz].unique().size, index = pd.MultiIndex.from_product([[colz],[agg[i]]]))
+            )
+        # print(grouped.head())
+
+        if(agg[i] == 'unaggregated'):
+            trace = go.Scattergl(
+                x = grouped.index,
+                y = grouped[colz][agg[i]],
+                name = agg[i] + ' of ' + colz + ' vs ' + colx,
+                mode = mode[i],
+                text = source[hover_display],
+                hoverinfo = 'text'
+            )
+
+        else:
+            trace = go.Scattergl(
+                x = grouped.index,
+                y = grouped[colz][agg[i]],
+                name = agg[i] + ' of ' + colz + ' vs ' + colx,
+                mode = mode[i]
+            )
+        data.append(trace)
+        
+    layout = go.Layout(
+        title=(', ').join(agg) + ' of ' + colz + ' vs ' + colx,
+        yaxis=dict(
+            title=colz
+        ),
+        xaxis=dict(
+            title=colx
+        )
+    )
+    
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = py.iplot(fig)
+    
+def distribution(colx, source):
+    print(
+        '{}: {:0.1%} null ({:d} out of {:d})'\
+            .format(
+                colx
+                , source[colx].isnull().sum() / source.shape[0]
+                , source[colx].isnull().sum()
+                , source.shape[0]
+            )
+        )
+    temp = source
+
+    if coly == 'Absolute Unit':
+        trace = go.Histogram(x=temp[colx],
+                        name=colx,
+                        marker=dict(
+                            color='rgb(49,130,189)')
+                    )
+        layout = go.Layout(
+            title='distribution',
+            yaxis=dict(
+                title='count'
+            ),
+            xaxis=dict(
+                title=colx
+            )
+        )
+    else:
+        trace = go.Histogram(x=temp[colx],
+                        name=colx,
+                        histnorm='percent',
+                        marker=dict(
+                            color='rgb(49,130,189)')
+                    )
+        layout = go.Layout(
+            title='distribution',
+            yaxis=dict(
+                title='Percent (%)'
+            ),
+            xaxis=dict(
+                title=colx
+            )
+        )
+
+    data = [trace]
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = py.iplot(fig)
+
+
+
 def generate_widget(df):
 
     def f(viz = 'X-Y', colx = '', coly = '', colz = '', colw = 10, na = False, asc = '', source = df):
