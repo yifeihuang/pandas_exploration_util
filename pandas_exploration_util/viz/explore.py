@@ -229,7 +229,7 @@ def generate_widget(df):
             col3.description = ''
             col4.description = ''
             col2.options = ['Absolute Unit', 'Percent']
-            col2.disabled = True
+            col2.disabled = False
             col3.options = ['']
             col3.disabled = True
             col4.disabled = True
