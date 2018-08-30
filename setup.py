@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="Pandas Data Exploration Utility Package",
-    version="0.0.2",
+    version="0.0.3",
     author="Yifei Huang",
     author_email="yifei.huang@gmail.com",
     description="Utility functions to help with exploratory data analysis on top the Pandas APIs",
